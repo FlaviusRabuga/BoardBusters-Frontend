@@ -1,0 +1,126 @@
+.containerLogIn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+
+    font-family: sans-serif;
+}
+.pagina {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.headerLog {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.scris {
+    margin-bottom: 20px;
+}
+.input1 {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+}
+.input2 {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    
+    background-color: #f5f5f5;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputLog {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #3b3f3b;
+    
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+.buttonLog {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #3b3f3b;
+    background-color: #3b3f3b;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.buttonLog1 {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.buton3 {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.buton4 {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+
+}
