@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "dropdown": "^0.2.0",
+    "next": "14.2.2",
     "react": "^18",
+    "react-bootstrap": "^2.10.2",
+    "react-bootstrap-dropdown": "^0.3.0",
     "react-dom": "^18",
-    "next": "14.2.2"
+    "react-dropdown": "^1.11.0"
   },
   "devDependencies": {
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.2"
+    "eslint-config-next": "14.2.2",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
   }
 }
