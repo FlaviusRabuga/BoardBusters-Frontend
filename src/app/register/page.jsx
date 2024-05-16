@@ -28,9 +28,25 @@ export default function Page() {
     const data = new FormData(event.target);
     const username = data.get('username');
     const password = data.get('password');
-    // const email = data.get('email'); 
+    const email = data.get('email'); 
+
+    if (selectedItem === "") {
+      alert('Please select a function');
+      return false;
+    }
+
+    if (username === '' || password === '' || email === '') {
+      alert('Please fill in all fields');
+      return false;
+    }
+
+    if (email.contains('@') === false) {
+      alert('Please enter a valid email');
+      return false;
+    }
     console.log(username);
     console.log(password);
+    console.log(email);
     console.log(selectedItem);
 
     // const valid =  validateInput(username, password);
@@ -51,23 +67,22 @@ export default function Page() {
   return (
 
     <>
-    
     <form className="containerLogIn" onSubmit={sendRegisterData}>
       <div className="pagina">
         <div className="headerLog">
-          <div className="scris">Login
+          <div className="scris">Register your account
           </div>
         </div>
         <div className="input1"> <input className="inputLog" type="text" placeholder="Username" name="username">
         </input> </div>
         <div className="input2"> <input className="inputLog" type="password" placeholder="Password" password="password" name="password">
         </input> </div>
-        <div className="input2"> <input className="inputLog" type="text" placeholder="email" password="password" name="email">
+        <div className="input2"> <input className="inputLog" type="text" placeholder="Email" password="password" name="email">
         </input> </div>
         
         <Dropdown>
-          <Dropdown.Toggle  variant="success" id="dropdown-basic">
-            Dropdown Button
+          <Dropdown.Toggle  variant="success" id="dropdown-basic" className = "butonFunctie">
+            Alege functia
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -78,11 +93,7 @@ export default function Page() {
           </Dropdown.Menu>
         </Dropdown>
         <pre> selectedItem : {selectedItem}</pre>
-
-        
-        
-
-        <div> <button className="buttonLog">Login</button> </div>
+        <div> <button className="buttonLog">Register</button> </div>
         
 
       </div>

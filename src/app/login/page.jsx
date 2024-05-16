@@ -38,6 +38,7 @@ export default function Page() {
   }
 
   return (
+    
     <form className="containerLogIn" onSubmit={sendLoginData}>
       <div className="pagina">
         <div className="headerLog">
@@ -52,13 +53,15 @@ export default function Page() {
         <div> <button className="buttonLog"
         >Login</button> </div>
         <div>
+        <p className="paragraf"> Need an account? </p>
           <Link href="/register">
-            <button className="buttonLog1">Need an account?</button>
+            <button className="buttonLog1">
+            Register here</button>
           </Link>
         </div>
-
       </div>
     </form>
+    
   );
 
 
