@@ -45,11 +45,20 @@
 
 .addProject {
     width: 100%;
+    height: 8vh;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #3b3f3b;
     color: white;
     font-size: 20px;
+    /*center the items on center on line*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+
+
 }
 
 .buton {
@@ -163,6 +172,43 @@
     font-size: 20px;
     cursor: pointer;
     margin-top: 10px;
+}
+
+.buttonLogin{
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #666;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    /*move the button to the right of the screen*/
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+
+
+
+
+.button{
+    width: 8%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #3b3f3b;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    
+}
+
+.buttonLogin:hover {
+    background-color: #4d4d4d; /* Change background color when hovered */
 }
 
 

@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import "./style.css";
 import Link from 'next/link';
+// import {Link} from 'react-router-dom';
 
 
 function sendBoardData(event) {
@@ -40,6 +41,7 @@ export default function Page() {
       <div className="header">
         <div className="addProject">
           <button className="button" onClick={() => setShowIsland(true)}>Add Project</button>
+          <Link href="/login" className="buttonLogin">Log in</Link>
           <div className="scris">Projects</div>
         </div>
       </div>
