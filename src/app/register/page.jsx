@@ -40,8 +40,8 @@ export default function Page() {
       return false;
     }
 
-    if (email.contains('@') === false) {
-      alert('Please enter a valid email');
+    if (email.indexOf('@') === -1) {
+      alert('Invalid email');
       return false;
     }
     console.log(username);

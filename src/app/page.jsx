@@ -4,10 +4,21 @@ import { useState, useEffect } from 'react';
 import "./style.css";
 import Link from 'next/link';
 // import {Link} from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from 'next/router';
+import { BUILD_MANIFEST } from "next/dist/shared/lib/constants";
+
+let toggle = false
 
 
 function sendBoardData(event) {
+  // const [showIsland, setShowIsland] = useState(false);
+
   event.preventDefault();
+  // setShowIsland(false);
   const data = new FormData(event.target);
   const field1 = data.get('field1');
   const field2 = data.get('field2');
@@ -16,75 +27,80 @@ function sendBoardData(event) {
 
   // de pus si useru curent
 
-  const response = fetch('http://localhost:5000/api/board', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ field1, field2 }),
-  });
+  // const response = fetch('http://localhost:5000/api/board', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({ field1, field2 }),
+  // });
 
+}
+
+function buna() {
+  console.log("clicked");
+
+}
+
+
+
+function faCeva() {
+  console.log("clicked");
 }
 
 export default function Page() {
 
   const [showIsland, setShowIsland] = useState(false);
 
-
-  // useEffect(() => {
-  //   // This code runs after the component has mounted
-  //   setShowIsland(true);
-  // }, []);
   return (
+    <>
+      <form className="containerMare" onSubmit={sendBoardData}>
 
-    <div className="container">
-      <div className="header">
-        <div className="addProject">
-          <button className="button" onClick={() => setShowIsland(true)}>Add Project</button>
-          <Link href="/login" className="buttonLogin">Log in</Link>
-          <div className="scris">Projects</div>
-        </div>
-      </div>
-      <div className="projects">
-        <div className="project">
-          <div className="projectName">Project 1</div>
-          <div className="projectDescription">Description 1</div>
-        </div>
-        <div className="project">
-          
-          <div className="projectName">Project 2</div>
-          <div className="projectDescription">Description 2</div>
-          
-        </div>
-        <div className="project" onClick = {() => console.log("clicked")}>
-          <div className="projectName">Project 3</div>
-          <div className="projectDescription">Description 3</div>
-        </div>
-        {showIsland &&
-          <div className="overlay">
-            <div className="island">
-              <div className="islandHeader">
-                <div className="closeButton" onClick={() => setShowIsland(false)}>Go back</div>
-              </div >
-              
-              <form className="formBoard" >
-                <div className = "label">
-                <label className = "scris">
-                  Insert the name of the project:
-                  <input className = "inputLog" type="text" name="field1" />
-                </label>
-                </div>
-                <label className = "scris">
-                  Provide a description:
-                  <input className = "inputLog" type="text" name="field2" />
-                </label >
-                <input className= "submitButton" type="submit" value="Submit" />
-              </form>
-            </div>
+        <div className="header">
+          <div className="addProject">
+            <div className="button" onClick={() => setShowIsland(true)}>Add Project</div>
+            <Link href="/login" className="buttonLogin">Log in</Link>
+            <div className="scris">Projects</div>
           </div>
-        }
-      </div>
-    </div>
+        </div>
+        <div className="projects">
+          <a className="project" href="/login">
+            <div className="projectName">Project 1</div>
+            <div className="projectDescription">Description 1</div>
+          </a>
+          <div className="project">
+
+            <div className="projectName">Project 2</div>
+            <div className="projectDescription">Description 2</div>
+
+          </div>
+          <div className="project" onClick={() => console.log("clicked")}>
+            <div className="projectName">Project 3</div>
+            <div className="projectDescription">Description 3</div>
+          </div>
+
+          {showIsland &&
+            <div className="overlay">
+              <div className="island">
+                <div className="islandHeader">
+                  <div className="closeButton" onClick={() => setShowIsland(false)}>Go back</div>
+                </div >
+                <div className="label">
+                  Insert the name of the project:
+                  <input className="inputLog" type="text" name="field1" />
+                </div>
+
+                Provide a description:
+                <input className="inputLog" type="text" name="field2" />
+                <button className="button"  >Create</button>
+              </div>
+            </div>
+          }
+        </div>
+
+      </form>
+    </>
+
 
 
   );

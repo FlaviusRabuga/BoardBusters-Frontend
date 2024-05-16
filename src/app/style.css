@@ -1,16 +1,10 @@
-.contaier {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: white;
-}
+
 
 .projects {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
     background-color: #f0f0f0;
 }
 
@@ -23,6 +17,8 @@
     text-align: center;
     font-family: sans-serif;
     margin-left: 10px;
+    color: black;
+    text-decoration: none;
 }
 
 .projectName {
@@ -55,9 +51,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    
-
 
 }
 
@@ -72,9 +65,9 @@
 }
 .header {
     font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    height: 10vh;
+    width: 100%;
 }
 
 .islandTitle {
@@ -192,8 +185,6 @@
 }
 
 
-
-
 .button{
     width: 8%;
     height: auto;
@@ -202,13 +193,24 @@
     background-color: #3b3f3b;
     color: white;
     font-size: 20px;
+    /* move this to the left of the div */
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
     cursor: pointer;
-    margin-top: 10px;
+
+    
     
 }
 
 .buttonLogin:hover {
     background-color: #4d4d4d; /* Change background color when hovered */
+}
+
+
+.containerMare {
+    background-color: #f0f0f0;
+
 }
 
 
