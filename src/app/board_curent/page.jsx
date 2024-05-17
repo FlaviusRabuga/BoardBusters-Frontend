@@ -46,7 +46,7 @@ export default function Page() {
 
         <div className="header">
         <div className="addProject">
-            <div className="buttonProject" onClick={() => setShowIsland(true)}>Add Project</div>
+            <div className="buttonProject" onClick={() => setShowIsland(true)}>Add Task</div>
             <Link href="/login" className="buttonLogin">Log in</Link>
             <div className="scris">Projects</div>
         </div>
@@ -86,6 +86,28 @@ export default function Page() {
                 </div>
             </div>
         </div>
+
+        {showIsland &&
+            <div className="overlay">
+              <div className="island">
+                <div className="islandHeader">
+                  <div className="closeButton" onClick={() => setShowIsland(false)}>Go back</div>
+                </div >
+                <div className="label">
+                  Insert the name of the project:
+                  <input className="inputLog" type="text" name="field1" />
+                </div>
+                <div className="label">
+                  Provide a description:
+                  <input className="inputLog" type="text" name="field2" />
+                </div>
+                <div className="label">
+                  <button className="button">Create</button>
+                </div>
+              </div>
+            </div>
+          }
+          
         </form>
 
     );

@@ -16,7 +16,8 @@
     "react-bootstrap": "^2.10.2",
     "react-bootstrap-dropdown": "^0.3.0",
     "react-dom": "^18",
-    "react-dropdown": "^1.11.0"
+    "react-dropdown": "^1.11.0",
+    "react-modal": "^3.16.1"
   },
   "devDependencies": {
     "eslint": "^8",
