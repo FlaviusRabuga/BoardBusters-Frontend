@@ -1,0 +1,151 @@
+.header {
+    font-size: 30px;
+    /* display: flex; */
+    height: 8vh;
+    width: 100%;
+}
+
+.containerMare {
+    background-color: #f0f0f0;
+    /* background-color: red; */
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+
+}
+
+.addProject {
+    width: 100%;
+    height: 8vh;
+    /* border: 1px solid #3b3f3b; */
+    background-color: #3b3f3b;
+    color: white;
+    font-size: 20px;
+    /*center the items on center on line*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.buttonLogin{
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #666;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+
+.buttonLogin:hover {
+    background-color: #4d4d4d; /* Change background color when hovered */
+}
+
+.buttonProject {
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #666;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+
+}
+
+.buttonProject:hover {
+    background-color: #4d4d4d; /* Change background color when hovered */
+}
+
+.columns{
+    width: 100vw;
+    height: auto;
+    top: 8vh;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.columnAssigned{
+    /* height: 30vh; */
+    height: auto;
+    width: 30vw;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.columnInProgress{
+    /* height: 30vh; */
+    height: auto;
+    width: 30vw;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.columnDone{
+    /* height: 30vh; */
+    height: auto;
+    width: 30vw;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.title{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 15%;
+    /* background-color: green; */
+    font-family: sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+
+.tasks{
+    width: 80%;
+    /* height: 85%; */
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.task{
+    border: #3b3f3b 1px solid;
+    width: 100%;
+    /* height: 100%; */
+    height: 20vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
