@@ -11,6 +11,36 @@ export default function Page() {
     const [showIsland, setShowIsland] = useState(false);
 
 
+    // const [tasks, setTasks] = useState({
+    //     assigned: ['Task1', 'Task2'],
+    //     inProgress: [],
+    //     done: []
+    // });
+
+
+    // function handleDragStart(e) {
+    //     e.dataTransfer.setData('text/plain', e.target.textContent);
+    // }
+    
+    // function handleDragOver(e) {
+    //     e.preventDefault(); // Necessary to allow drop
+    // }
+    
+    // function handleDrop(e, column) {
+    //     e.preventDefault();
+    //     const task = e.dataTransfer.getData('text');
+    
+    //     // Remove the task from its original column and add it to the new column
+    //     setTasks(prevTasks => {
+    //         const newTasks = {...prevTasks};
+    //         Object.keys(newTasks).forEach(key => {
+    //             newTasks[key] = newTasks[key].filter(t => t !== task);
+    //         });
+    //         newTasks[column].push(task);
+    //         return newTasks;
+    //     });
+    // }
+
     return (
         <form className="containerMare">
 
@@ -27,6 +57,12 @@ export default function Page() {
                     Assigned
                 </div>
                 <div className="tasks">
+                {/* <div className="tasks" onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'assigned')}>
+                    {tasks.assigned.map((task, index) => (
+                        <div key={index} className="task" draggable="true" onDragStart={handleDragStart}>{task}</div>
+                    ))}
+                </div> */}
+                    {/* <div className="task" draggable="true" onDragStart={handleDragStart}>Task1</div> */}
                     <div className="task">Task1</div>
                     <div className="task">Task2</div>
                 </div>
