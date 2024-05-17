@@ -102,13 +102,4 @@ export default function Page() {
     </>
   );
 
-
-  
-
-
-
-
-
-
-
 }

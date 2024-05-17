@@ -58,26 +58,58 @@ export default function Page() {
 
         <div className="header">
           <div className="addProject">
-            <div className="button" onClick={() => setShowIsland(true)}>Add Project</div>
+            <div className="buttonProject" onClick={() => setShowIsland(true)}>Add Project</div>
             <Link href="/login" className="buttonLogin">Log in</Link>
             <div className="scris">Projects</div>
           </div>
         </div>
         <div className="projects">
           <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
             <div className="projectName">Project 1</div>
             <div className="projectDescription">Description 1</div>
           </a>
-          <div className="project">
-
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
             <div className="projectName">Project 2</div>
             <div className="projectDescription">Description 2</div>
 
-          </div>
-          <div className="project" onClick={() => console.log("clicked")}>
+          </a>
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
             <div className="projectName">Project 3</div>
             <div className="projectDescription">Description 3</div>
-          </div>
+          </a>
+
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
+            <div className="projectName">Project 3</div>
+            <div className="projectDescription">Description 3</div>
+          </a>
+
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
+            <div className="projectName">Project 3</div>
+            <div className="projectDescription">Description 3</div>
+          </a>
+
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
+            <div className="projectName">Project 3</div>
+            <div className="projectDescription">Description 3</div>
+          </a>
+
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
+            <div className="projectName">Project 3</div>
+            <div className="projectDescription">Description 3</div>
+          </a>
+
+          <a className="project" href="/login">
+            {/* href te duce la pagina proiectului ala */}
+            <div className="projectName">Project 3</div>
+            <div className="projectDescription">Description 3</div>
+          </a>
 
           {showIsland &&
             <div className="overlay">
@@ -89,10 +121,13 @@ export default function Page() {
                   Insert the name of the project:
                   <input className="inputLog" type="text" name="field1" />
                 </div>
-
-                Provide a description:
-                <input className="inputLog" type="text" name="field2" />
-                <button className="button"  >Create</button>
+                <div className="label">
+                  Provide a description:
+                  <input className="inputLog" type="text" name="field2" />
+                </div>
+                <div className="label">
+                  <button className="button">Create</button>
+                </div>
               </div>
             </div>
           }
