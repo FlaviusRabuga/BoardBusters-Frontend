@@ -22,10 +22,16 @@ let toggle = false
 function logOut() {
 	localStorage.removeItem('username');
 	localStorage.removeItem('userId');
+	console.log(userId);
 	window.location.href = '/login';
 }
 
 function goToBoard(boardId) {
+	const username = localStorage.getItem('username');
+	const userId = localStorage.getItem('userId');
+	console.log("Da",username);
+	// localStorage.setItem('username', username);
+	// localStorage.setItem('userId', userId);
 	localStorage.setItem('boardId', boardId);
 	window.location.href = '/board_curent';
 }

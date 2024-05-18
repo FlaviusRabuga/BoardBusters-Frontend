@@ -4,10 +4,34 @@ import "./style.css";
 import Link from 'next/link';
 import { useState } from 'react';
 import Select from 'react-select'
-
+import Modal from 'react-modal';
 
 
 export default function Page() {
+
+	const [showError, setShowError] = useState(false);
+	const [showStatus, setShowStatus] = useState(true);
+	const [errorMessage, setErrorMessage] = useState('');
+	var showUserDetails =  useState(false);
+	var userIdNo =  useState('');
+	
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+		  showUserDetails = localStorage.getItem('userId') ? true : false;
+		  userIdNo = localStorage.getItem('userId');
+		}
+	  
+		// Rest of your useEffect code...
+	  }, []);
+
+	const handleLogout = () => {
+		// Remove userId from localStorage
+		localStorage.removeItem('userId');
+		// Perform any other necessary cleanup
+		// Redirect to login page
+		window.location.href = '/login';
+	  };
+	
 
 	async function sendNewTaskData(event) {
 		event.preventDefault();
@@ -16,6 +40,7 @@ export default function Page() {
 		const name = data.get('taskName');
 		const descr = data.get('taskDescription');
 		const time = data.get('taskDeadline');
+		
 	
 		console.log(name);
 		console.log(descr);
@@ -39,10 +64,15 @@ export default function Page() {
 
 		const responseData = await response.json();
 		console.log(responseData);
-
+		setErrorMessage(responseData.message);
+		setShowError(true);
+		setShowStatus(responseData.success);
 		if (responseData.success === true) {
-			window.location.reload();
+			setTimeout(() => {
+				window.location.reload();
+			  }, 2500);
 		}
+		
 	
 	
 	
@@ -157,9 +187,9 @@ export default function Page() {
 
 	}, []);
 
-	console.log("todo " + tasksTODO);
-	console.log("proges " + tasksInProgress);
-	console.log("done" + tasksDone);
+	// console.log("todo " + tasksTODO);
+	// console.log("proges " + tasksInProgress);
+	// console.log("done" + tasksDone);
 
 
 	// const [tasks, setTasks] = useState({
@@ -197,9 +227,46 @@ export default function Page() {
 
 			<div className="header">
 				<div className="addProject">
-					<div className="buttonProject" onClick={() => setShowIsland(true)}>Add Task</div>
-					<Link href="/login" className="buttonLogin">Log in</Link>
-					<div className="scris">Projects</div>
+				<div className="buttonProject" onClick={() => setShowIsland(true)}>Add Task</div>
+        {showUserDetails ? (
+  <div onClick={handleLogout} className="buttonLogin">Log out</div>
+) : (
+  <Link href="/login" className="buttonLogin">Log in</Link>
+)}
+        <div className="scris">Projects</div>
+			<Modal
+                isOpen={showError}
+                onRequestClose={() => setShowError(false)}
+                contentLabel="Message Modal"
+                style={{
+                  content: {
+                      width: '25%', // Set the width to 50% of the window
+                      height: '25%', // Set the height to 50% of the window
+                      margin: 'auto', // Center the modal in the window
+                      display: 'flex', // Use Flexbox for layout
+                      flexDirection: 'column', // Stack the items vertically
+                      justifyContent: 'center', // Center the items vertically
+                      alignItems: 'center', // Center the items horizontally
+                      backgroundColor: 'rgb(173, 216, 230)',
+                  },
+              }}
+            >
+                <h4>{errorMessage}</h4>
+				{!showStatus && (
+    			<button 
+      				onClick={() => setShowError(false)}
+      				style={{
+        				backgroundColor: 'red',
+        				borderRadius: '10px',
+        				color: 'white',
+        				border: 'none',
+        				padding: '10px 20px',
+      				}}
+    			>
+      			Close
+    			</button>
+  				)}
+            </Modal>
 				</div>
 			</div>
 			<div className="columns">
@@ -212,9 +279,9 @@ export default function Page() {
 							tasksTODO.map((task, index) => {
 								return (
 									<div key={index} className="task">
-										<div className="taskName">{task.TITLE}</div>
+										<div className="taskName" >{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
-										<div className="taskDeadline">{task.DEADLINE}</div>
+										<div className="taskDeadline" >{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
 									</div>
 								);
 							})
@@ -232,7 +299,7 @@ export default function Page() {
 									<div key={index} className="task">
 										<div className="taskName">{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
-										<div className="taskDeadline">{task.DEADLINE}</div>
+										<div className="taskDeadline">{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
 									</div>
 								);
 							})
@@ -250,7 +317,7 @@ export default function Page() {
 									<div key={index} className="task">
 										<div className="taskName">{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
-										<div className="taskDeadline">{task.DEADLINE}</div>
+										<div className="taskDeadline">{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
 									</div>
 								);
 							})
