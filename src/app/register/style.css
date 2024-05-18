@@ -19,6 +19,38 @@
     font-family: sans-serif;
 }
 
+.input1 {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.input2 {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    
+    background-color: #f5f5f5;
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .scris {
     text-align: center;
     font-size: 20px;

@@ -145,7 +145,7 @@ export default function Page() {
             </Modal>
 
             <Link href="/login">
-            <button className="buttonLog1">
+            <button className="buttonLog">
             Go to Login</button>
           </Link>
 
