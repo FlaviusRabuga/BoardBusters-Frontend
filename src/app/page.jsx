@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from 'next/router';
 import { BUILD_MANIFEST } from "next/dist/shared/lib/constants";
 import Select from 'react-select'
+import Modal from 'react-modal';
 
 let toggle = false
 
@@ -43,6 +44,8 @@ export default function Page() {
 
 	const [users, setUsers] = useState([]);
 	const [selectedUsers, setselectedUsers] = useState([]);
+	const [showModuleMessage, setShowModuleMessage] = useState(false);
+	const [moduleMessage, setModuleMessage] = useState('');
 
 	let selUsers = [];
 
@@ -122,20 +125,20 @@ export default function Page() {
 				boardsUsers: selUsers
 			}),
 		});
-	
 		const responseData = await response.json();
-	
 		console.log(responseData);
+
+		if (responseData.success) {
+            window.location.reload();
+        }
+		else {
+			setModuleMessage(responseData.message);
+			setShowModuleMessage(true);
+		}
 	
 	}
-
-	console.log(boards); // sa dam muie ls js
+	console.log(boards);
 	console.log(users);
-
-
-
-
-
 	return (
 		<>
 			<form className="containerMare" onSubmit={createBoard}>
@@ -202,12 +205,39 @@ export default function Page() {
 						})
 					}
 				</div>
-
+				<Modal
+                isOpen={showModuleMessage}
+                onRequestClose={() => setShowModuleMessage(false)}
+                contentLabel="Message Modal"
+                style={{
+                  content: {
+                      width: '25%', // Set the width to 50% of the window
+                      height: '25%', // Set the height to 50% of the window
+                      margin: 'auto', // Center the modal in the window
+                      display: 'flex', // Use Flexbox for layout
+                      flexDirection: 'column', // Stack the items vertically
+                      justifyContent: 'center', // Center the items vertically
+                      alignItems: 'center', // Center the items horizontally
+                      backgroundColor: 'rgb(173, 216, 230)',
+                  },
+              }}
+            >
+                <h4>{moduleMessage}</h4>
+                <button 
+                      onClick={() => setShowModuleMessage(false)}
+                      style={{
+                        backgroundColor: 'red', // Set the background color to red
+                        borderRadius: '10px', // Round the corners
+                        color: 'white', // Set the text color to white
+                        border: 'none', // Remove the border
+                        padding: '10px 20px', // Add some padding
+                      }}
+              >
+                Close
+                </button>
+            </Modal>
 			</form>
 		</>
-
-
-
 	);
 }
 

@@ -169,7 +169,7 @@ export default function Page() {
                       flexDirection: 'column', // Stack the items vertically
                       justifyContent: 'center', // Center the items vertically
                       alignItems: 'center', // Center the items horizontally
-                      backgroundColor: 'yellow',
+                      backgroundColor: 'rgb(173, 216, 230)',
                   },
               }}
             >
@@ -182,6 +182,7 @@ export default function Page() {
                         color: 'white', // Set the text color to white
                         border: 'none', // Remove the border
                         padding: '10px 20px', // Add some padding
+                        alignSelf: 'flex-start', // Align the button to the left
                       }}
               >
                 Close
