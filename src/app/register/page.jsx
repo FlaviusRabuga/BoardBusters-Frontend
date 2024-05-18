@@ -48,6 +48,12 @@ export default function Page() {
       return false;
     }
 
+    if (username.indexOf('(') !== -1 || username.indexOf(')') !== -1) {
+      setModalMessage('Please do not use \'(\' or \')\' in your username');
+      setModalIsOpen(true);
+      return false;
+    }
+
     if (email.indexOf('@') === -1) {
       // alert('Invalid email');
       setModalMessage('Invalid email');
