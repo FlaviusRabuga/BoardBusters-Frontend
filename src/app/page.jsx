@@ -14,7 +14,8 @@ import { BUILD_MANIFEST } from "next/dist/shared/lib/constants";
 let toggle = false
 
 
-function sendBoardData(event) {
+
+function createBoard(event) {
   // const [showIsland, setShowIsland] = useState(false);
 
   event.preventDefault();
@@ -32,54 +33,69 @@ function sendBoardData(event) {
     alert("Please fill in all the fields");
     return;
   }
-
-
-
-  // PT MAI TARZIU LA API
-  const proj = document.getElementsByClassName("projects")[0];
-  let newProject = document.createElement("a");
-  newProject.className = "project";
-
-  let newProjectName = document.createElement("div");
-  newProjectName.className = "projectName";
-  newProjectName.innerHTML = field1;
-
-  let newProjectDescription = document.createElement("div");
-  newProjectDescription.className = "projectDescription";
-  newProjectDescription.innerHTML = field2;
-
-  newProject.appendChild(newProjectName);
-  newProject.appendChild(newProjectDescription);
-  proj.appendChild(newProject);
-
-
-
-  // de pus si useru curent
-
-  // const response = fetch('http://localhost:5000/api/board', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({ field1, field2 }),
-  // });
-
 }
 
-
+function logOut() {
+  localStorage.removeItem('username');
+  localStorage.removeItem('userId');
+  window.location.href = '/login';
+}
 
 export default function Page() {
+
+  // get all boards once the page is loaded with useEffect
+
+  const [boards, setBoards] = useState([]);
+  const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('');
+
+  useEffect(() => {
+
+    // get username and userId from local storage
+    let value_username = localStorage.getItem('username') || '';
+    setUsername(value_username);
+
+    let value_userId = localStorage.getItem('userId') || '';
+    setUserId(value_userId);
+
+    async function getBoards() {
+      const response = await fetch('http://localhost:5000/api/getBoards', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: value_userId }),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+      setBoards(responseData.boards);
+    }
+
+    getBoards();
+
+  }, []);
+
+  console.log(boards);
+
+  
 
   const [showIsland, setShowIsland] = useState(false);
 
   return (
     <>
-      <form className="containerMare" onSubmit={sendBoardData}>
+      <form className="containerMare" onSubmit={createBoard}>
 
         <div className="header">
           <div className="addProject">
             <div className="buttonProject" onClick={() => setShowIsland(true)}>Add Project</div>
-            <Link href="/login" className="buttonLogin">Log in</Link>
+            {(username == '') &&
+                <Link href="/login" className="buttonLogin">Log in</Link>
+            }
+            {(username !== '') &&
+                <div className="buttonLogin" onClick={() => logOut()}>Log out</div>
+            }
+            
             <div className="scris">Projects</div>
           </div>
         </div>
@@ -105,6 +121,17 @@ export default function Page() {
                 </div>
               </div>
             </div>
+          }
+
+          {
+            boards.map((board, index) => {
+              return (
+                <div className="project" key={index}>
+                  <div className="projectName">{board.NAME}</div>
+                  <div className="projectDescription">{board.DESCRIPTION}</div>
+                </div>
+              );
+            })
           }
         </div>
 

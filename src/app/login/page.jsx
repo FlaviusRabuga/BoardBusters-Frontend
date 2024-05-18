@@ -48,6 +48,7 @@ export default function Page() {
 
 			// save username in local storage
 			localStorage.setItem('username', username);
+			localStorage.setItem('userId', responseData.userId);
 		}
 		else {
 			setModalMessage(responseData.message);
