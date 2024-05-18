@@ -15,6 +15,9 @@ export default function Page() {
   const items =['Manager', 'Employee']
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [registerSuccess, setRegisterSuccess] = useState(false);
+  const modalMessageRegisteredSuccesfully = 'You registered succesfully!'
+
   function validateInput(username, password) {
     if (username === '' || password === '') {
       setModalMessage('Please fill in all fields');
@@ -51,6 +54,9 @@ export default function Page() {
       setModalIsOpen(true);
       return false;
     }
+
+    setRegisterSuccess(true);
+
     console.log(username);
     console.log(password);
     console.log(email);
@@ -132,6 +138,38 @@ export default function Page() {
                 <h2>{modalMessage}</h2>
                 <button 
                       onClick={() => setModalIsOpen(false)}
+                      style={{
+                        backgroundColor: 'red', // Set the background color to red
+                        borderRadius: '10px', // Round the corners
+                        color: 'white', // Set the text color to white
+                        border: 'none', // Remove the border
+                        padding: '10px 20px', // Add some padding
+                      }}
+              >
+                Close
+                </button>
+            </Modal>
+
+            <Modal
+                isOpen={registerSuccess}
+                onRequestClose={() => setRegisterSuccess(false)}
+                contentLabel="Message Modal"
+                style={{
+                  content: {
+                      width: '25%', // Set the width to 50% of the window
+                      height: '25%', // Set the height to 50% of the window
+                      margin: 'auto', // Center the modal in the window
+                      display: 'flex', // Use Flexbox for layout
+                      flexDirection: 'column', // Stack the items vertically
+                      justifyContent: 'center', // Center the items vertically
+                      alignItems: 'center', // Center the items horizontally
+                      backgroundColor: 'yellow',
+                  },
+              }}
+            >
+                <h4>{modalMessageRegisteredSuccesfully}</h4>
+                <button 
+                      onClick={() => setRegisterSuccess(false)}
                       style={{
                         backgroundColor: 'red', // Set the background color to red
                         borderRadius: '10px', // Round the corners
