@@ -28,9 +28,15 @@ function sendBoardData(event) {
   let currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
   console.log(currentDate);
 
+  if (field1 === "" || field2 === "") {
+    alert("Please fill in all the fields");
+    return;
+  }
 
+
+
+  // PT MAI TARZIU LA API
   const proj = document.getElementsByClassName("projects")[0];
-
   let newProject = document.createElement("a");
   newProject.className = "project";
 
@@ -45,10 +51,6 @@ function sendBoardData(event) {
   newProject.appendChild(newProjectName);
   newProject.appendChild(newProjectDescription);
   proj.appendChild(newProject);
-
-  
-
-
 
 
 

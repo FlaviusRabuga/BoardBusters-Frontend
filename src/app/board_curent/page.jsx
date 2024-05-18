@@ -7,18 +7,24 @@ import { useState } from 'react';
 function sendNewTaskData(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    const field1 = data.get('field1');
-    const field2 = data.get('field2');
-    const field3 = data.get('field3');
-    console.log(field1);
-    console.log(field2);
-    console.log(field3);
+    const name = data.get('field1');
+    const descr = data.get('field2');
+    const time = data.get('field3');
+    console.log(name);
+    console.log(descr);
+    console.log(time);
+
+
+    const tasks = document.getElementsByClassName("tasks")[0];
+
+    let newTask = document.createElement("div");
+    newTask.className = "task";
+    newTask.innerHTML = name;
 }
 
 export default function Page() {
 
     const [showIsland, setShowIsland] = useState(false);
-
 
     // const [tasks, setTasks] = useState({
     //     assigned: ['Task1', 'Task2'],
@@ -115,7 +121,7 @@ export default function Page() {
                     <input className="inputLog" type="date" name="field3" />
                 </div>
                 <div className="label">
-                  <button className="button">Create</button>
+                  <button  className="button" >Create</button>
                 </div>
               </div>
             </div>

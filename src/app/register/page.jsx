@@ -88,19 +88,7 @@ export default function Page() {
         <div className="input2"> <input className="inputLog" type="text" placeholder="Email" password="password" name="email">
         </input> </div>
         
-        {/* <Dropdown>
-          <Dropdown.Toggle  variant="success" id="dropdown-basic" className = "butonFunctie">
-            Alege functia
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            {items.map((item, index) => (
-              <Dropdown.Item key={index} onClick = { () => setSelectedItem(item)}>{item}</Dropdown.Item>
-            ))
-          }
-          </Dropdown.Menu>
-        </Dropdown> */}
-        <h3>Alege functia</h3>
+        <h3>Choose your role</h3>
         <div style={{ textAlign: 'left' }}></div>
         <DropdownButton
           as={ButtonGroup}
@@ -117,7 +105,7 @@ export default function Page() {
           }
         </DropdownButton>
 
-        <pre> selectedItem : {selectedItem}</pre>
+        {/* <pre> selectedItem : {selectedItem}</pre> */}
         <div> <button className="buttonLog">Register</button> </div>
         <Modal
                 isOpen={modalIsOpen}
@@ -150,6 +138,11 @@ export default function Page() {
                 Close
                 </button>
             </Modal>
+
+            <Link href="/login">
+            <button className="buttonLog1">
+            Go to Login</button>
+          </Link>
 
       </div>
     </form>
