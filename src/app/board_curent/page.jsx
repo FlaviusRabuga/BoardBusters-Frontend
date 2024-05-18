@@ -15,16 +15,67 @@ function sendNewTaskData(event) {
     console.log(time);
 
 
-    const tasks = document.getElementsByClassName("tasks")[0];
+    // adaugare in assigned
 
-    let newTask = document.createElement("div");
-    newTask.className = "task";
-    newTask.innerHTML = name;
+    // const assigned = document.querySelector('.columnAssigned .tasks');
+
+    // const task = document.createElement('div');
+    // const taskName = document.createElement('div');
+    // const taskDescription = document.createElement('div');
+    // const taskDeadline = document.createElement('div');
+
+    // task.classList.add('task');
+    // taskName.classList.add('taskName');
+    // taskDescription.classList.add('taskDescription');
+    // taskDeadline.classList.add('taskDeadline');
+
+    // taskName.textContent = name;
+    // taskDescription.textContent = descr;
+    // taskDeadline.textContent = time;
+
+    // task.appendChild(taskName);
+    // task.appendChild(taskDescription);
+    // task.appendChild(taskDeadline);
+
+    // assigned.appendChild(task);
+
+    // adauga in inProgress
+
+    const inProgress = document.querySelector('.columnInProgress .tasks');
+
+    const taskInProgress = document.createElement('div');
+    const taskNameInProgress = document.createElement('div');
+    const taskDescriptionInProgress = document.createElement('div');
+    const taskDeadlineInProgress = document.createElement('div');
+
+
+    taskInProgress.addEventListener('click', () => {
+        setShowTaskDetails(true)
+    }
+    )
+
+    taskInProgress.classList.add('task');
+    taskNameInProgress.classList.add('taskName');
+    taskDescriptionInProgress.classList.add('taskDescription');
+    taskDeadlineInProgress.classList.add('taskDeadline');
+
+    taskNameInProgress.textContent = name;
+    taskDescriptionInProgress.textContent = descr;
+    taskDeadlineInProgress.textContent = time;
+
+    taskInProgress.appendChild(taskNameInProgress);
+    taskInProgress.appendChild(taskDescriptionInProgress);
+    taskInProgress.appendChild(taskDeadlineInProgress);
+
+    inProgress.appendChild(taskInProgress);
+
+
 }
 
 export default function Page() {
 
     const [showIsland, setShowIsland] = useState(false);
+    const [showTaskDetails, setShowTaskDetails] = useState(false);
 
     // const [tasks, setTasks] = useState({
     //     assigned: ['Task1', 'Task2'],
@@ -87,7 +138,11 @@ export default function Page() {
                     In Progress
                 </div>
                 <div className="tasks">
-                    <div className="task">Task1</div>
+                    {/* <div className="task" onClick = {() => setShowTaskDetails(true)}>
+                        <div className="taskName">TaskName</div>
+                        <div className="taskDescription">TaskDescription</div>
+                        <div className="taskDeadline">TaskDeadline</div>
+                    </div> */}
                     <div className="task">Task2</div>
                     <div className="task">Task3</div>
                 </div>
@@ -126,6 +181,20 @@ export default function Page() {
               </div>
             </div>
           }
+
+          {
+            showTaskDetails &&
+
+            <div className="overlay">
+              <div className="island">
+                <div className="islandHeader">
+                  <div className="closeButton" onClick={() => setShowTaskDetails(false)}>Go back</div>
+                </div >
+
+              </div>
+            </div>
+
+          } 
           
         </form>
 
