@@ -7,15 +7,18 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import Modal from 'react-modal';
 
 
 export default function Page() {
 
   const items =['Manager', 'Employee']
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   function validateInput(username, password) {
     if (username === '' || password === '') {
-      alert('Please fill in all fields');
+      setModalMessage('Please fill in all fields');
+      setModalIsOpen(true);
       return false;
     }
     return true;
@@ -31,17 +34,21 @@ export default function Page() {
     const email = data.get('email'); 
 
     if (selectedItem === "") {
-      alert('Please select a function');
+      setModalMessage('Please select a function');
+      setModalIsOpen(true);
       return false;
     }
 
     if (username === '' || password === '' || email === '') {
-      alert('Please fill in all fields');
+      setModalMessage('Please fill in all fields');
+      setModalIsOpen(true);
       return false;
     }
 
     if (email.indexOf('@') === -1) {
-      alert('Invalid email');
+      // alert('Invalid email');
+      setModalMessage('Invalid email');
+      setModalIsOpen(true);
       return false;
     }
     console.log(username);
@@ -63,6 +70,7 @@ export default function Page() {
     // console.log(responseData);
   }
 
+
   const [selectedItem, setSelectedItem] = useState("");
   return (
 
@@ -80,7 +88,7 @@ export default function Page() {
         <div className="input2"> <input className="inputLog" type="text" placeholder="Email" password="password" name="email">
         </input> </div>
         
-        <Dropdown>
+        {/* <Dropdown>
           <Dropdown.Toggle  variant="success" id="dropdown-basic" className = "butonFunctie">
             Alege functia
           </Dropdown.Toggle>
@@ -91,15 +99,61 @@ export default function Page() {
             ))
           }
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
+        <h3>Alege functia</h3>
+        <div style={{ textAlign: 'left' }}></div>
+        <DropdownButton
+          as={ButtonGroup}
+          key={'down'}
+          id={`dropdown-button-drop-${'down'}`}
+          drop={'down'}
+          variant="secondary"
+          title={selectedItem}
+          className = "butonFunctie"
+        >
+          {items.map((item, index) => (
+            <Dropdown.Item key={index} onClick = { () => setSelectedItem(item)}>{item}</Dropdown.Item>
+          ))
+          }
+        </DropdownButton>
+
         <pre> selectedItem : {selectedItem}</pre>
         <div> <button className="buttonLog">Register</button> </div>
-        
+        <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+                contentLabel="Message Modal"
+                style={{
+                  content: {
+                      width: '25%', // Set the width to 50% of the window
+                      height: '25%', // Set the height to 50% of the window
+                      margin: 'auto', // Center the modal in the window
+                      display: 'flex', // Use Flexbox for layout
+                      flexDirection: 'column', // Stack the items vertically
+                      justifyContent: 'center', // Center the items vertically
+                      alignItems: 'center', // Center the items horizontally
+                      backgroundColor: 'yellow',
+                  },
+              }}
+            >
+                <h2>{modalMessage}</h2>
+                <button 
+                      onClick={() => setModalIsOpen(false)}
+                      style={{
+                        backgroundColor: 'red', // Set the background color to red
+                        borderRadius: '10px', // Round the corners
+                        color: 'white', // Set the text color to white
+                        border: 'none', // Remove the border
+                        padding: '10px 20px', // Add some padding
+                      }}
+              >
+                Close
+                </button>
+            </Modal>
 
       </div>
     </form>
 
     </>
   );
-
 }
