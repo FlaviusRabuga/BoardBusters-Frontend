@@ -4,7 +4,16 @@ import "./style.css";
 import Link from 'next/link';
 import { useState } from 'react';
 
-
+function sendNewTaskData(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const field1 = data.get('field1');
+    const field2 = data.get('field2');
+    const field3 = data.get('field3');
+    console.log(field1);
+    console.log(field2);
+    console.log(field3);
+}
 
 export default function Page() {
 
@@ -42,7 +51,7 @@ export default function Page() {
     // }
 
     return (
-        <form className="containerMare">
+        <form className="containerMare" onSubmit = {sendNewTaskData}>
 
         <div className="header">
         <div className="addProject">
@@ -93,13 +102,17 @@ export default function Page() {
                 <div className="islandHeader">
                   <div className="closeButton" onClick={() => setShowIsland(false)}>Go back</div>
                 </div >
-                <div className="label">
-                  Insert the name of the project:
+                <div className="labelNume">
+                  Insert the name of the task:
                   <input className="inputLog" type="text" name="field1" />
                 </div>
-                <div className="label">
-                  Provide a description:
+                <div className="labelDescriere">
+                  Provide a short description of the task:
                   <input className="inputLog" type="text" name="field2" />
+                </div>
+                <div className="labelData">
+                    Deadline:
+                    <input className="inputLog" type="date" name="field3" />
                 </div>
                 <div className="label">
                   <button className="button">Create</button>

@@ -24,6 +24,33 @@ function sendBoardData(event) {
   const field2 = data.get('field2');
   console.log(field1);
   console.log(field2);
+  const date = new Date();
+  let currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  console.log(currentDate);
+
+
+  const proj = document.getElementsByClassName("projects")[0];
+
+  let newProject = document.createElement("a");
+  newProject.className = "project";
+
+  let newProjectName = document.createElement("div");
+  newProjectName.className = "projectName";
+  newProjectName.innerHTML = field1;
+
+  let newProjectDescription = document.createElement("div");
+  newProjectDescription.className = "projectDescription";
+  newProjectDescription.innerHTML = field2;
+
+  newProject.appendChild(newProjectName);
+  newProject.appendChild(newProjectDescription);
+  proj.appendChild(newProject);
+
+  
+
+
+
+
 
   // de pus si useru curent
 
@@ -37,16 +64,7 @@ function sendBoardData(event) {
 
 }
 
-function buna() {
-  console.log("clicked");
 
-}
-
-
-
-function faCeva() {
-  console.log("clicked");
-}
 
 export default function Page() {
 
@@ -64,52 +82,7 @@ export default function Page() {
           </div>
         </div>
         <div className="projects">
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 1</div>
-            <div className="projectDescription">Description 1</div>
-          </a>
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 2</div>
-            <div className="projectDescription">Description 2</div>
-
-          </a>
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 3</div>
-            <div className="projectDescription">Description 3</div>
-          </a>
-
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 3</div>
-            <div className="projectDescription">Description 3</div>
-          </a>
-
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 3</div>
-            <div className="projectDescription">Description 3</div>
-          </a>
-
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 3</div>
-            <div className="projectDescription">Description 3</div>
-          </a>
-
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 3</div>
-            <div className="projectDescription">Description 3</div>
-          </a>
-
-          <a className="project" href="/login">
-            {/* href te duce la pagina proiectului ala */}
-            <div className="projectName">Project 3</div>
-            <div className="projectDescription">Description 3</div>
-          </a>
+          
 
           {showIsland &&
             <div className="overlay">
