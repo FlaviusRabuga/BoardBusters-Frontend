@@ -41,6 +41,11 @@ function logOut() {
   window.location.href = '/login';
 }
 
+function goToBoard(boardId) {
+  localStorage.setItem('boardId', boardId);
+  window.location.href = '/board_curent';
+}
+
 export default function Page() {
 
   // get all boards once the page is loaded with useEffect
@@ -126,7 +131,7 @@ export default function Page() {
           {
             boards.map((board, index) => {
               return (
-                <div className="project" key={index}>
+                <div className="project" key={index} onClick={() => goToBoard(board.BOARD_ID)}>
                   <div className="projectName">{board.NAME}</div>
                   <div className="projectDescription">{board.DESCRIPTION}</div>
                 </div>
