@@ -7,22 +7,66 @@ import Select from 'react-select'
 import Modal from 'react-modal';
 
 
+
 export default function Page() {
 
 	const [showError, setShowError] = useState(false);
 	const [showStatus, setShowStatus] = useState(true);
 	const [errorMessage, setErrorMessage] = useState('');
-	var showUserDetails =  useState(false);
-	var userIdNo =  useState('');
-	
+	var showUserDetails = useState(false);
+	var userIdNo = useState('');
+
+	const customStyles = {
+		control: (provided) => ({ // class attribute : class=" css-i32vvf-control"
+		  ...provided,
+		  background: 'transparent',
+		  display: 'flex',
+		  flexWrap: 'nowrap',
+		  borderColor: 'hsl(0deg 78.56% 55.56%);',
+		  width: '7em'
+		}),
+		menu: (provided) => ({ // 'menu' is from the div class too.
+		  ...provided,
+		  background: 'transparent',
+		  width: '4em'
+		})
+	};
+
+
+
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-		  showUserDetails = localStorage.getItem('userId') ? true : false;
-		  userIdNo = localStorage.getItem('userId');
+			showUserDetails = localStorage.getItem('userId') ? true : false;
+			userIdNo = localStorage.getItem('userId');
 		}
-	  
+
 		// Rest of your useEffect code...
-	  }, []);
+	}, []);
+
+	const moveTaskToDone = (taskId) => {
+		// Find the task in the tasksInProgress array
+		const task = tasksTODO.find(task => task.ID === taskId);
+		console.log("alo");
+
+		// If the task is not found, return early
+		if (!task) {
+			console.log("bn")
+			return;
+
+		}
+
+		// console.log(tasksTODO)
+		// Remove the task from the tasksInProgress array
+		const updatedTasksTODO = tasksTODO.filter(task => task.ID !== taskId);
+		// console.log(updatedTasksTODO);
+
+		// Add the task to the tasksDone array
+		const updatedTasksDone = [...tasksDone, task];
+
+		// Update the state
+		setTasksInProgress(updatedTasksTODO);
+		setTasksDone(updatedTasksDone);
+	};
 
 	const handleLogout = () => {
 		// Remove userId from localStorage
@@ -30,18 +74,18 @@ export default function Page() {
 		// Perform any other necessary cleanup
 		// Redirect to login page
 		window.location.href = '/login';
-	  };
-	
+	};
+
 
 	async function sendNewTaskData(event) {
 		event.preventDefault();
 		const data = new FormData(event.target);
-		
+
 		const name = data.get('taskName');
 		const descr = data.get('taskDescription');
 		const time = data.get('taskDeadline');
-		
-	
+
+
 		console.log(name);
 		console.log(descr);
 		console.log(time);
@@ -70,41 +114,41 @@ export default function Page() {
 		if (responseData.success === true) {
 			setTimeout(() => {
 				window.location.reload();
-			  }, 2500);
+			}, 2500);
 		}
-		
-	
-	
-	
+
+
+
+
 		// const inProgress = document.querySelector('.columnInProgress .tasks');
-	
+
 		// const taskInProgress = document.createElement('div');
 		// const taskNameInProgress = document.createElement('div');
 		// const taskDescriptionInProgress = document.createElement('div');
 		// const taskDeadlineInProgress = document.createElement('div');
-	
-	
+
+
 		// taskInProgress.addEventListener('click', () => {
 		// 	setShowTaskDetails(true)
 		// }
 		// )
-	
+
 		// taskInProgress.classList.add('task');
 		// taskNameInProgress.classList.add('taskName');
 		// taskDescriptionInProgress.classList.add('taskDescription');
 		// taskDeadlineInProgress.classList.add('taskDeadline');
-	
+
 		// taskNameInProgress.textContent = name;
 		// taskDescriptionInProgress.textContent = descr;
 		// taskDeadlineInProgress.textContent = time;
-	
+
 		// taskInProgress.appendChild(taskNameInProgress);
 		// taskInProgress.appendChild(taskDescriptionInProgress);
 		// taskInProgress.appendChild(taskDeadlineInProgress);
-	
+
 		// inProgress.appendChild(taskInProgress);
-	
-	
+
+
 	}
 
 	const [showIsland, setShowIsland] = useState(false);
@@ -187,86 +231,53 @@ export default function Page() {
 
 	}, []);
 
-	// console.log("todo " + tasksTODO);
-	// console.log("proges " + tasksInProgress);
-	// console.log("done" + tasksDone);
-
-
-	// const [tasks, setTasks] = useState({
-	//     assigned: ['Task1', 'Task2'],
-	//     inProgress: [],
-	//     done: []
-	// });
-
-
-	// function handleDragStart(e) {
-	//     e.dataTransfer.setData('text/plain', e.target.textContent);
-	// }
-
-	// function handleDragOver(e) {
-	//     e.preventDefault(); // Necessary to allow drop
-	// }
-
-	// function handleDrop(e, column) {
-	//     e.preventDefault();
-	//     const task = e.dataTransfer.getData('text');
-
-	//     // Remove the task from its original column and add it to the new column
-	//     setTasks(prevTasks => {
-	//         const newTasks = {...prevTasks};
-	//         Object.keys(newTasks).forEach(key => {
-	//             newTasks[key] = newTasks[key].filter(t => t !== task);
-	//         });
-	//         newTasks[column].push(task);
-	//         return newTasks;
-	//     });
-	// }
 
 	return (
 		<form className="containerMare" onSubmit={sendNewTaskData}>
 
 			<div className="header">
 				<div className="addProject">
-				<div className="buttonProject" onClick={() => setShowIsland(true)}>Add Task</div>
-        {showUserDetails ? (
-  <div onClick={handleLogout} className="buttonLogin">Log out</div>
-) : (
-  <Link href="/login" className="buttonLogin">Log in</Link>
-)}
-        <div className="scris">Projects</div>
-			<Modal
-                isOpen={showError}
-                onRequestClose={() => setShowError(false)}
-                contentLabel="Message Modal"
-                style={{
-                  content: {
-                      width: '25%', // Set the width to 50% of the window
-                      height: '25%', // Set the height to 50% of the window
-                      margin: 'auto', // Center the modal in the window
-                      display: 'flex', // Use Flexbox for layout
-                      flexDirection: 'column', // Stack the items vertically
-                      justifyContent: 'center', // Center the items vertically
-                      alignItems: 'center', // Center the items horizontally
-                      backgroundColor: 'rgb(173, 216, 230)',
-                  },
-              }}
-            >
-                <h4>{errorMessage}</h4>
-				{!showStatus && (
-    			<button 
-      				onClick={() => setShowError(false)}
-      				style={{
-        				backgroundColor: 'red',
-        				borderRadius: '10px',
-        				color: 'white',
-        				border: 'none',
-        				padding: '10px 20px',
-      				}}
-    			>
-      			Close
-    			</button>
-  				)}
-            </Modal>
+					<div className="buttonProject" onClick={() => setShowIsland(true)}>Add Task</div>
+					{showUserDetails ? (
+						<div onClick={handleLogout} className="buttonLogin">Log out</div>
+					) : (
+						<Link href="/login" className="buttonLogin">Log in</Link>
+					)}
+
+					<div className="scris">Projects</div>
+					<Modal
+						isOpen={showError}
+						onRequestClose={() => setShowError(false)}
+						contentLabel="Message Modal"
+						style={{
+							content: {
+								width: '25%', // Set the width to 50% of the window
+								height: '25%', // Set the height to 50% of the window
+								margin: 'auto', // Center the modal in the window
+								display: 'flex', // Use Flexbox for layout
+								flexDirection: 'column', // Stack the items vertically
+								justifyContent: 'center', // Center the items vertically
+								alignItems: 'center', // Center the items horizontally
+								backgroundColor: 'rgb(173, 216, 230)',
+							},
+						}}
+					>
+						<h4>{errorMessage}</h4>
+						{!showStatus && (
+							<button
+								onClick={() => setShowError(false)}
+								style={{
+									backgroundColor: 'red',
+									borderRadius: '10px',
+									color: 'white',
+									border: 'none',
+									padding: '10px 20px',
+								}}
+							>
+								Close
+							</button>
+						)}
+					</Modal>
 				</div>
 			</div>
 			<div className="columns">
@@ -274,11 +285,19 @@ export default function Page() {
 					<div className="title">
 						Assigned
 					</div>
-					<div className="tasks">
+					<div className="tasks" >
 						{
 							tasksTODO.map((task, index) => {
 								return (
-									<div key={index} className="task">
+									<div key={index} className="task" draggable="true" onDragStart={(event) => {
+										const taskID = event.dataTransfer.setData('task_id', task.ID);
+										console.log(taskID);
+									}}
+
+
+									>
+
+										{/* BA PULA MEA VA UITATI SI VOI AICI */}
 										<div className="taskName" >{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
 										<div className="taskDeadline" >{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
@@ -288,7 +307,14 @@ export default function Page() {
 						}
 					</div>
 				</div>
-				<div className="columnInProgress">
+				<div className="columnInProgress" onDragOver={(event) => {
+					event.preventDefault();
+				}}
+					onDrop={(event) => {
+						event.preventDefault();
+						const taskId = event.dataTransfer.getData('task_id');
+						// moveTaskToDone(taskId);
+					}}>
 					<div className="title">
 						In Progress
 					</div>
@@ -296,7 +322,10 @@ export default function Page() {
 						{
 							tasksInProgress.map((task, index) => {
 								return (
-									<div key={index} className="task">
+									<div key={index} className="task" draggable="true" onDragStart={(event) => {
+										event.dataTransfer.setData('task_id', task.ID);
+									}}
+									>
 										<div className="taskName">{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
 										<div className="taskDeadline">{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
@@ -306,7 +335,17 @@ export default function Page() {
 						}
 					</div>
 				</div>
-				<div className="columnDone">
+				<div className="columnDone"
+					onDragOver={(event) => {
+						event.preventDefault();
+					}}
+					onDrop={(event) => {
+						event.preventDefault();
+						const taskId = event.dataTransfer.getData('task_id');
+						moveTaskToDone(taskId);
+					}}
+				//   SI AICI
+				>
 					<div className="title">
 						Done
 					</div>
@@ -345,7 +384,9 @@ export default function Page() {
 							<input className="inputLog" type="date" name="taskDeadline" />
 						</div>
 
-						<Select options={users}
+						<Select 
+							style = {customStyles}
+							options={users}
 							onChange={(e) => {
 								console.log(e);
 
