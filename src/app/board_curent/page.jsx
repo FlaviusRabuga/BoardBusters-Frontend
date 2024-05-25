@@ -45,7 +45,9 @@ export default function Page() {
 
 	const moveTaskToDone = (taskId) => {
 		// Find the task in the tasksInProgress array
-		const task = tasksTODO.find(task => task.ID === taskId);
+		const task = tasksTODO.find(task => task.TASK_ID == taskId);
+
+		console.log(tasksTODO);
 		console.log("alo");
 
 		// If the task is not found, return early
@@ -57,7 +59,10 @@ export default function Page() {
 
 		// console.log(tasksTODO)
 		// Remove the task from the tasksInProgress array
-		const updatedTasksTODO = tasksTODO.filter(task => task.ID !== taskId);
+		const updatedTasksTODO = tasksTODO.filter(task => task.ID != taskId);
+
+		console.log("AICI");
+		console.log(tasksInProgress);
 		// console.log(updatedTasksTODO);
 
 		// Add the task to the tasksDone array
@@ -66,6 +71,7 @@ export default function Page() {
 		// Update the state
 		setTasksInProgress(updatedTasksTODO);
 		setTasksDone(updatedTasksDone);
+		console.log(tasksInProgress);
 	};
 
 	const handleLogout = () => {
@@ -290,8 +296,10 @@ export default function Page() {
 							tasksTODO.map((task, index) => {
 								return (
 									<div key={index} className="task" draggable="true" onDragStart={(event) => {
-										const taskID = event.dataTransfer.setData('task_id', task.ID);
-										console.log(taskID);
+										// const taskID = event.dataTransfer.setData('task_id', task.ID);
+										// console.log(taskID);
+										event.dataTransfer.setData('task_id', task.TASK_ID);
+    									console.log(task.TASK_ID); // This will log the task ID
 									}}
 
 
@@ -342,6 +350,7 @@ export default function Page() {
 					onDrop={(event) => {
 						event.preventDefault();
 						const taskId = event.dataTransfer.getData('task_id');
+						console.log(taskId)
 						moveTaskToDone(taskId);
 					}}
 				//   SI AICI

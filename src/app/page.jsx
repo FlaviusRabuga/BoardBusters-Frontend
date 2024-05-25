@@ -22,7 +22,7 @@ let toggle = false
 function logOut() {
 	localStorage.removeItem('username');
 	localStorage.removeItem('userId');
-	console.log(userId);
+	// console.log(userId);
 	window.location.href = '/login';
 }
 
