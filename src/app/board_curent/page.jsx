@@ -157,6 +157,27 @@ export default function Page() {
 
 	}
 
+	async function updateTaskStatus(taskId, status) {
+		const response = await fetch('http://localhost:5000/api/changeTaskStatus', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				taskId: taskId,
+				status: status,
+			}),
+		});
+
+		const responseData = await response.json();
+
+		console.log(responseData);
+
+		if (responseData.success) {
+			window.location.reload();
+		}
+	}
+
 	const [showIsland, setShowIsland] = useState(false);
 	const [showTaskDetails, setShowTaskDetails] = useState(false);
 	const [tasksTODO, setTasksTODO] = useState([]);
@@ -230,6 +251,10 @@ export default function Page() {
 			setTasksDone(doneTasks);
 			setTasksInProgress(inProgressTasks);
 			setTasksTODO(todoTasks);
+
+			console.log(todoTasks);
+			console.log(inProgressTasks);
+			console.log(doneTasks);
 		}
 
 		getTasks();
@@ -287,9 +312,21 @@ export default function Page() {
 				</div>
 			</div>
 			<div className="columns">
-				<div className="columnAssigned">
+				<div className="columnAssigned" onDragOver={(event) => {
+					event.preventDefault();
+				}}
+					onDrop={(event) => {
+						event.preventDefault();
+						const taskId = event.dataTransfer.getData('task_id');
+						const currentStatus = event.dataTransfer.getData('currentStatus');
+						if (currentStatus !== 'TODO') {
+							// moveTaskToDone(taskId, 'TODO');
+							updateTaskStatus(taskId, 'TODO');
+						}
+
+					}}>
 					<div className="title">
-						Assigned
+						TO DO
 					</div>
 					<div className="tasks" >
 						{
@@ -299,6 +336,7 @@ export default function Page() {
 										// const taskID = event.dataTransfer.setData('task_id', task.ID);
 										// console.log(taskID);
 										event.dataTransfer.setData('task_id', task.TASK_ID);
+										event.dataTransfer.setData('currentStatus', 'TODO');
     									console.log(task.TASK_ID); // This will log the task ID
 									}}
 
@@ -322,21 +360,34 @@ export default function Page() {
 						event.preventDefault();
 						const taskId = event.dataTransfer.getData('task_id');
 						// moveTaskToDone(taskId);
+						const currentStatus = event.dataTransfer.getData('currentStatus');
+						if (currentStatus !== 'IN_PROGRESS') {
+							// moveTaskToDone(taskId, 'IN_PROGRESS');
+							updateTaskStatus(taskId, 'IN_PROGRESS');
+						}
 					}}>
 					<div className="title">
 						In Progress
 					</div>
-					<div className="tasks">
+					<div className="tasks" >
 						{
 							tasksInProgress.map((task, index) => {
 								return (
 									<div key={index} className="task" draggable="true" onDragStart={(event) => {
-										event.dataTransfer.setData('task_id', task.ID);
+										// const taskID = event.dataTransfer.setData('task_id', task.ID);
+										// console.log(taskID);
+										event.dataTransfer.setData('task_id', task.TASK_ID);
+										event.dataTransfer.setData('currentStatus', 'IN_PROGRESS');
+    									console.log(task.TASK_ID); // This will log the task ID
 									}}
+
+
 									>
-										<div className="taskName">{task.TITLE}</div>
+
+										{/* BA PULA MEA VA UITATI SI VOI AICI */}
+										<div className="taskName" >{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
-										<div className="taskDeadline">{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
+										<div className="taskDeadline" >{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
 									</div>
 								);
 							})
@@ -351,21 +402,37 @@ export default function Page() {
 						event.preventDefault();
 						const taskId = event.dataTransfer.getData('task_id');
 						console.log(taskId)
-						moveTaskToDone(taskId);
+						// moveTaskToDone(taskId);
+						const currentStatus = event.dataTransfer.getData('currentStatus');
+						if (currentStatus !== 'DONE') {
+							// moveTaskToDone(taskId, 'DONE');
+							updateTaskStatus(taskId, 'DONE');
+						}
 					}}
 				//   SI AICI
 				>
 					<div className="title">
 						Done
 					</div>
-					<div className="tasks">
+					<div className="tasks" >
 						{
 							tasksDone.map((task, index) => {
 								return (
-									<div key={index} className="task">
-										<div className="taskName">{task.TITLE}</div>
+									<div key={index} className="task" draggable="true" onDragStart={(event) => {
+										// const taskID = event.dataTransfer.setData('task_id', task.ID);
+										// console.log(taskID);
+										event.dataTransfer.setData('task_id', task.TASK_ID);
+										event.dataTransfer.setData('currentStatus', 'DONE');
+    									console.log(task.TASK_ID); // This will log the task ID
+									}}
+
+
+									>
+
+										{/* BA PULA MEA VA UITATI SI VOI AICI */}
+										<div className="taskName" >{task.TITLE}</div>
 										<div className="taskDescription">{task.DESCRIPTION}</div>
-										<div className="taskDeadline">{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
+										<div className="taskDeadline" >{new Date(task.DEADLINE).toISOString().substring(0, 16).replace('T', ' ')}</div>
 									</div>
 								);
 							})
